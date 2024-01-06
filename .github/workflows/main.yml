@@ -1,0 +1,100 @@
+name: "main"
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+#  test:
+#    name: test
+#    runs-on: ubuntu-latest
+#    timeout-minutes: 5
+#    steps:
+#      - name: Checkout repository
+#        uses: actions/checkout@v3
+#
+#      - name: Set up Go
+#        timeout-minutes: 1
+#        uses: actions/setup-go@v4
+#        with:
+#          go-version: "1.21"
+#
+#      - name: Run tests
+#        run: make test
+
+#  build:
+#    name: build
+#    needs: [test]
+#    runs-on: ubuntu-latest
+#    timeout-minutes: 5
+#    steps:
+#      - name: Checkout repository
+#        uses: actions/checkout@v3
+#
+#      - name: Set up Go
+#        timeout-minutes: 1
+#        uses: actions/setup-go@v4
+#        with:
+#          go-version: "1.21"
+#
+#      - name: Build commands
+#        run: make build
+#
+#      - name: Upload artifact
+#        uses: actions/upload-artifact@v3
+#        with:
+#          name: build
+#          path: build
+
+#  validate:
+#    name: validate
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout source code
+#        uses: actions/checkout@v3
+#
+#      - name: Install JSON validator
+#        run: |
+#          wget https://github.com/neilpa/yajsv/releases/download/v1.4.0/yajsv.linux.amd64
+#          chmod +x ./yajsv.linux.amd64
+#
+#      - name: Validate JSON
+#        run: |
+#          find ./routes/ -type f -name "*.json" -print0 | xargs -0 -I{} ./yajsv.linux.amd64 -s schema/routefile.schema.json {}
+
+  deploy:
+    name: deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: prod
+#    needs: [build, validate]
+    permissions:
+      id-token: write   # This is required for requesting the JWT
+      contents: read    # This is required for actions/checkout
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+
+      - name: Set up Go
+        timeout-minutes: 1
+        uses: actions/setup-go@v4
+        with:
+          go-version: "1.21"
+
+#      - name: Download artifact
+#        uses: actions/download-artifact@v3
+#        with:
+#          name: build
+#          path: build
+
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{vars.DEPLOYMENT_ROLE_ARN}}
+          aws-region: eu-west-1
+
+      - name: Install CDK
+        run: npm i -g aws-cdk
+
+      - name: CDK deploy
+        run: cdk deploy --require-approval never
