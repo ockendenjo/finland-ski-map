@@ -17,6 +17,8 @@ func NewStack(scope constructs.Construct, id string, props *StackProps) awscdk.S
 	}
 	stack := awscdk.NewStack(scope, &id, &sprops)
 
+	setupCloudFront(stack)
+
 	return stack
 }
 
@@ -35,5 +37,8 @@ func main() {
 }
 
 func env() *awscdk.Environment {
-	return nil
+	return &awscdk.Environment{
+		Account: jsii.String("574363388371"),
+		Region:  jsii.String("eu-west-1"),
+	}
 }
