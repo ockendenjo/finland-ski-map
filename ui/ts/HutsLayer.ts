@@ -24,10 +24,19 @@ export class HutsLayer extends LayerDefBase implements LayerDef {
     }
 
     private getFeature(h: Hut): Feature<any> {
+        let txt = h.name;
+        if (h.way) {
+            let url = `https://www.openstreetmap.org/way/${h.way}`;
+            txt += `<p><a href="${url}" target="_blank">${url}</a></p>`;
+        }
+
         let iconFeature = new Feature({
             geometry: new Point(fromLonLat([h.lon, h.lat])),
             type: "HUT",
-            data: h,
+            popup: {
+                title: h.reservable ? "Hut" : "Open hut",
+                text: txt,
+            },
         });
 
         iconFeature.setStyle(h.reservable ? RESERVABLE_STYLE : OPEN_STYLE);
@@ -62,6 +71,7 @@ type Hut = {
     lat: number;
     lon: number;
     reservable: boolean;
+    way?: string;
 };
 
 const RESERVABLE_STYLE = HutsLayer.buildStyle(8, "green");
