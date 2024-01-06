@@ -9,12 +9,28 @@ export class BusLayer extends LayerDefBase implements LayerDef {
     render() {
         const buses: Bus[] = [
             {
-                from: "Pallas",
-                to: "Kolari station",
+                from: "Pallas (1340/1735)",
+                to: "Kolari station (1600/1910)",
                 points: ["68.04604/24.06252", "67.34865/23.83554"],
+            },
+            {
+                from: "Kolari station (1105)",
+                to: "Hetta (1400)",
+                points: [
+                    "67.34865/23.83554",
+                    "67.60228/23.54669",
+                    "67.95504/23.68197",
+                    "67.90991/23.91992",
+                    "68.14022/24.22155",
+                    "68.28992/24.02064",
+                    "68.38721/24.20255",
+                    "68.44249/24.01688",
+                    "68.38556/23.64377",
+                ],
             },
         ];
 
+        const source = this.getSource();
         buses.forEach((b) => {
             const feature = new Feature({
                 geometry: this.getLineString(b),
@@ -25,7 +41,8 @@ export class BusLayer extends LayerDefBase implements LayerDef {
                 },
             });
             feature.setStyle(LINE_STYLE);
-            this.getSource().addFeature(feature);
+            source.addFeature(feature);
+            console.log(feature);
         });
 
         return Promise.resolve();
