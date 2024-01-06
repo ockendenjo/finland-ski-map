@@ -1,5 +1,6 @@
 import "./map.css";
-import {Map, View} from "ol";
+import "./popup.css";
+import {Map, Overlay, View} from "ol";
 import TileLayer from "ol/layer/Tile";
 import OSM from "ol/source/OSM";
 import VectorLayer from "ol/layer/Vector";
@@ -12,6 +13,7 @@ import {HutsLayer} from "./ts/HutsLayer";
 import {StartLayer} from "./ts/StartLayer";
 import {FinishLayer} from "./ts/FinishLayer";
 import {ControlsLayer} from "./ts/ControlsLayer";
+import {BusLayer} from "./ts/BusLayer";
 
 document.addEventListener("DOMContentLoaded", () => {
     const layerSwitch = 10;
@@ -32,6 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
     rasterLayers.forEach((r) => r.setOpacity(0.6));
 
     const layerDefs: LayerDef[] = [
+        new BusLayer(),
         new HutsLayer(),
         new StartLayer(),
         new FinishLayer(),
@@ -61,14 +64,40 @@ document.addEventListener("DOMContentLoaded", () => {
             view: mapView,
         });
 
+        const container = document.getElementById("popup") as HTMLDivElement;
+        const title = document.getElementById("popup-title") as HTMLDivElement;
+        const text = document.getElementById("popup-text") as HTMLDivElement;
+        const closer = document.getElementById(
+            "popup-closer"
+        ) as HTMLDivElement;
+
+        const overlay = new Overlay({
+            element: container,
+            autoPan: true,
+        });
+
         map.on("click", function (e) {
             const feature = map.forEachFeatureAtPixel(e.pixel, (f) =>
-                f.getProperties().data ? f : false
+                f.getProperties().popup ? f : false
             );
             if (!feature) {
+                overlay.setPosition(undefined);
+                closer.blur();
                 return;
             }
+            const props = feature.getProperties().popup;
+
+            title.innerHTML = props.title;
+            text.innerHTML = props.text;
+            overlay.setPosition(e.coordinate);
         });
+
+        map.addOverlay(overlay);
+        closer.onclick = () => {
+            overlay.setPosition(undefined);
+            closer.blur();
+            return false;
+        };
     }
 
     function loadLayers() {
