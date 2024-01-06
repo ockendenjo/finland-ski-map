@@ -3,7 +3,7 @@ import {LayerDefBase} from "./LayerDefBase";
 import {Feature} from "ol";
 import {fromLonLat} from "ol/proj";
 import {Point} from "ol/geom";
-import {Fill, RegularShape, Stroke, Style} from "ol/style";
+import {RegularShape, Stroke, Style} from "ol/style";
 
 export class StartLayer extends LayerDefBase implements LayerDef {
     render() {

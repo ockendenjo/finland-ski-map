@@ -45,6 +45,7 @@ jobs:
         run: |
           jq -c . < ui/huts.json > /tmp/huts.json
           cp /tmp/huts.json ui/dist
+          cp ui/pistes.gpx ui/dist
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3

@@ -3,8 +3,6 @@ import {LayerDefBase} from "./LayerDefBase";
 import {Feature} from "ol";
 import {fromLonLat} from "ol/proj";
 import {Point} from "ol/geom";
-import {Circle, Fill, RegularShape, Stroke, Style} from "ol/style";
-import {buildStyle} from "ol/render/canvas/style";
 import {FinishLayer} from "./FinishLayer";
 
 export class ControlsLayer extends LayerDefBase implements LayerDef {

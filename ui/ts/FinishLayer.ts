@@ -3,8 +3,7 @@ import {LayerDefBase} from "./LayerDefBase";
 import {Feature} from "ol";
 import {fromLonLat} from "ol/proj";
 import {Point} from "ol/geom";
-import {Circle, Fill, RegularShape, Stroke, Style} from "ol/style";
-import {buildStyle} from "ol/render/canvas/style";
+import {Circle, Stroke, Style} from "ol/style";
 
 export class FinishLayer extends LayerDefBase implements LayerDef {
     render() {

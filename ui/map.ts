@@ -14,6 +14,7 @@ import {StartLayer} from "./ts/StartLayer";
 import {FinishLayer} from "./ts/FinishLayer";
 import {ControlsLayer} from "./ts/ControlsLayer";
 import {BusLayer} from "./ts/BusLayer";
+import {pistesLayer} from "./ts/pistes";
 
 document.addEventListener("DOMContentLoaded", () => {
     const layerSwitch = 10;
@@ -59,7 +60,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 new ScaleLine(),
             ]),
             target: "map",
-            layers: [...rasterLayers, ...layerDefs.map((d) => d.getLayer())],
+            layers: [
+                ...rasterLayers,
+                pistesLayer,
+                ...layerDefs.map((d) => d.getLayer()),
+            ],
             keyboardEventTarget: document,
             view: mapView,
         });
