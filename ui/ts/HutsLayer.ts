@@ -25,7 +25,14 @@ export class HutsLayer extends LayerDefBase implements LayerDef {
 
     private getFeature(h: Hut): Feature<any> {
         let txt = h.name;
-        if (h.way) {
+        if (h.note) {
+            txt += `<p>${h.note}</p>`;
+        }
+
+        if (h.node) {
+            let url = `https://www.openstreetmap.org/node/${h.node}`;
+            txt += `<p><a href="${url}" target="_blank">${url}</a></p>`;
+        } else if (h.way) {
             let url = `https://www.openstreetmap.org/way/${h.way}`;
             txt += `<p><a href="${url}" target="_blank">${url}</a></p>`;
         }
@@ -39,7 +46,11 @@ export class HutsLayer extends LayerDefBase implements LayerDef {
             },
         });
 
-        iconFeature.setStyle(h.reservable ? RESERVABLE_STYLE : OPEN_STYLE);
+        if (h.type === "LAPP") {
+            iconFeature.setStyle(LAPP_STYLE);
+        } else {
+            iconFeature.setStyle(h.reservable ? RESERVABLE_STYLE : OPEN_STYLE);
+        }
 
         return iconFeature;
     }
@@ -68,11 +79,15 @@ type HutsFile = {
 
 type Hut = {
     name: string;
+    type: string;
     lat: number;
     lon: number;
     reservable: boolean;
+    node?: string;
     way?: string;
+    note?: string;
 };
 
 const RESERVABLE_STYLE = HutsLayer.buildStyle(8, "green");
 const OPEN_STYLE = HutsLayer.buildStyle(8, "orange");
+const LAPP_STYLE = HutsLayer.buildStyle(8, "grey");

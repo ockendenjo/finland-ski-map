@@ -2,42 +2,57 @@
     "huts": [
         {
             "name": "Sioskuru",
+            "type": "HUT",
             "lat": 68.29784,
             "lon": 23.81701,
-            "reservable": true
+            "reservable": true,
+            "node": "3581078137",
+            "note": "14 Mar: B&Z stay"
         },
         {
             "name": "Sioskuru",
+            "type": "HUT",
             "lat": 68.29787,
             "lon": 23.81713,
-            "reservable": false
+            "reservable": false,
+            "node": "3581078138"
         },
         {
             "name": "Hannukuru",
+            "type": "HUT",
             "lat": 68.21776,
             "lon": 23.94408,
-            "reservable": true
+            "reservable": true,
+            "note": "15 Mar: 3 beds booked",
+            "way": "608145555"
         },
         {
             "name": "Hannukuru",
+            "type": "HUT",
             "lat": 68.21789,
             "lon": 23.94522,
-            "reservable": false
+            "reservable": false,
+            "way": "608145553"
         },
         {
             "name": "Hannukuru",
+            "type": "HUT",
             "lat": 68.21805,
             "lon": 23.94892,
-            "reservable": false
+            "reservable": false,
+            "way": "608145551"
         },
         {
             "name": "Pahakuru",
+            "type": "HUT",
             "lat": 68.22526,
             "lon": 23.91912,
-            "reservable": false
+            "reservable": false,
+            "way": "608152484"
         },
         {
             "name": "Tappuri",
+            "type": "HUT",
             "lat": 68.28197,
             "lon": 23.86874,
             "reservable": false,
@@ -45,6 +60,7 @@
         },
         {
             "name": "Pyhäkero",
+            "type": "HUT",
             "lat": 68.34286,
             "lon": 23.72034,
             "reservable": false,
@@ -52,13 +68,16 @@
         },
         {
             "name": "Suaskuru",
+            "type": "LAPP",
             "lat": 68.18584,
             "lon": 23.99376,
             "reservable": false,
-            "way": "607726397"
+            "way": "607726397",
+            "note": "Intended for daytime use only"
         },
         {
             "name": "Montell",
+            "type": "HUT",
             "lat": 68.13867,
             "lon": 24.04038,
             "reservable": false,
@@ -66,17 +85,47 @@
         },
         {
             "name": "Nammalakuru",
+            "type": "HUT",
             "lat": 68.12970,
             "lon": 24.05645,
             "reservable": true,
-            "way": "654712277"
+            "way": "654712277",
+            "note": "16/17 Mar: 5 beds booked"
         },
         {
             "name": "Rihmakuru",
+            "type": "LAPP",
             "lat": 68.10855,
             "lon": 24.04974,
             "reservable": false,
-            "way": "607720876"
+            "way": "607720876",
+            "note": "Intended for daytime use only"
+        },
+        {
+            "name": "Varkaanjärvi",
+            "type": "LAPP",
+            "lat": 68.18072,
+            "lon": 24.05499,
+            "reservable": false,
+            "way": "1167791851",
+            "note": "Intended for daytime use only"
+        },
+        {
+            "name": "Pallas",
+            "type": "LAPP",
+            "lat": 68.04223,
+            "lon": 24.07917,
+            "reservable": false,
+            "way": "607635366",
+            "note": "Intended for daytime use only"
+        },
+        {
+            "name": "Mäntyrova",
+            "type": "HUT",
+            "lat": 68.02702,
+            "lon": 24.00520,
+            "reservable": false,
+            "way": "608437019"
         }
     ]
 }
