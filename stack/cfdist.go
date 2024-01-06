@@ -45,7 +45,7 @@ func setupCloudFront(stack awscdk.Stack) {
 			CachePolicy:          awscloudfront.CachePolicy_CACHING_OPTIMIZED(),
 		},
 		AdditionalBehaviors: &map[string]*awscloudfront.BehaviorOptions{
-			"live.json":  &noCacheBehaviour,
+			"huts.json":  &noCacheBehaviour,
 			"index.html": &noCacheBehaviour,
 		},
 		PriceClass:  awscloudfront.PriceClass_PRICE_CLASS_100,
