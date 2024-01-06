@@ -22,29 +22,35 @@ jobs:
 #      - name: Run tests
 #        run: make test
 
-#  build:
-#    name: build
-#    needs: [test]
-#    runs-on: ubuntu-latest
-#    timeout-minutes: 5
-#    steps:
-#      - name: Checkout repository
-#        uses: actions/checkout@v3
-#
-#      - name: Set up Go
-#        timeout-minutes: 1
-#        uses: actions/setup-go@v4
-#        with:
-#          go-version: "1.21"
-#
-#      - name: Build commands
-#        run: make build
-#
-#      - name: Upload artifact
-#        uses: actions/upload-artifact@v3
-#        with:
-#          name: build
-#          path: build
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+
+      - name: Install Node modules
+        working-directory: ui
+        run: npm install
+
+      - name: Check formatting
+        working-directory: ui
+        run: npx prettier --check .
+
+      - name: Build
+        working-directory: ui
+        run: npm run build
+
+      - name: Copy JSON files
+        run: |
+          jq -c . < ui/huts.json > /tmp/huts.json
+          cp /tmp/huts.json ui/dist
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: ui/dist
 
 #  validate:
 #    name: validate
@@ -67,7 +73,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     environment: prod
-#    needs: [build, validate]
+    needs: [build]
     permissions:
       id-token: write   # This is required for requesting the JWT
       contents: read    # This is required for actions/checkout
@@ -81,11 +87,11 @@ jobs:
         with:
           go-version: "1.21"
 
-#      - name: Download artifact
-#        uses: actions/download-artifact@v3
-#        with:
-#          name: build
-#          path: build
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: build
+          path: ui/dist
 
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -98,3 +104,6 @@ jobs:
 
       - name: CDK deploy
         run: cdk deploy --require-approval never
+
+      - name: S3 Sync
+        run: aws s3 sync ./ui/dist s3://${{vars.S3_BUCKET_NAME}}

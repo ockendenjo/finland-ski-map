@@ -1,0 +1,112 @@
+@import "node_modules/ol/ol.css";
+
+html,
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    font-family: arial, veranda, "open sans";
+    overflow: hidden;
+}
+
+body {
+    flex-direction: row;
+    display: flex;
+}
+
+#map {
+    flex: 1 1 auto;
+}
+
+#rightPanel {
+    width: 320px;
+    height: 100%;
+    border-left: 2px solid #404040;
+    background-color: #fafafa;
+    display: flex;
+}
+
+#rightPanelContent {
+    padding: 10px;
+    flex: 1 1 auto;
+    overflow-y: auto;
+}
+
+#hill-details {
+    display: none;
+}
+
+.data-row {
+    display: flex;
+    flex-direction: row;
+    padding: 4px 0;
+}
+
+.data-row:not(:last-of-type) {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.data-row > div {
+    flex: 1;
+}
+
+.visit {
+    background: #eeeeee;
+    padding: 8px;
+    margin-bottom: 8px;
+}
+
+.visit > div:not(:last-of-type) {
+    margin-bottom: 4px;
+}
+
+.opacity-container {
+    margin-top: 8px;
+}
+
+#opacity {
+    width: 100%;
+}
+
+#others_container,
+#remaining_container {
+    display: none;
+}
+
+.label {
+    font-size: 0.8em;
+    display: inline-block;
+    padding: 2px 4px;
+    border-radius: 4px;
+    margin-right: 2px;
+    margin-bottom: 1px;
+}
+
+.label-munro,
+.label-munro_top {
+    background: #c80537;
+    color: white;
+}
+
+.label-corbett {
+    background: #de6a00;
+    color: white;
+}
+
+.label-graham {
+    background: #007859;
+    color: white;
+}
+
+.label-simm {
+    background: blue;
+    color: white;
+}
+
+.label-marilyn {
+    background: #ad90d9;
+}
+
+.label-hump {
+    background: #aaaaaa;
+}

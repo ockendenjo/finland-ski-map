@@ -1,0 +1,82 @@
+{
+    "huts": [
+        {
+            "name": "Sioskuru",
+            "lat": 68.29784,
+            "lon": 23.81701,
+            "reservable": true
+        },
+        {
+            "name": "Sioskuru",
+            "lat": 68.29787,
+            "lon": 23.81713,
+            "reservable": false
+        },
+        {
+            "name": "Hannukuru",
+            "lat": 68.21776,
+            "lon": 23.94408,
+            "reservable": true
+        },
+        {
+            "name": "Hannukuru",
+            "lat": 68.21789,
+            "lon": 23.94522,
+            "reservable": false
+        },
+        {
+            "name": "Hannukuru",
+            "lat": 68.21805,
+            "lon": 23.94892,
+            "reservable": false
+        },
+        {
+            "name": "Pahakuru",
+            "lat": 68.22526,
+            "lon": 23.91912,
+            "reservable": false
+        },
+        {
+            "name": "Tappuri",
+            "lat": 68.28197,
+            "lon": 23.86874,
+            "reservable": false,
+            "way": "607929996"
+        },
+        {
+            "name": "Pyhäkero",
+            "lat": 68.34286,
+            "lon": 23.72034,
+            "reservable": false,
+            "way": "608078816"
+        },
+        {
+            "name": "Suaskuru",
+            "lat": 68.18584,
+            "lon": 23.99376,
+            "reservable": false,
+            "way": "607726397"
+        },
+        {
+            "name": "Montell",
+            "lat": 68.13867,
+            "lon": 24.04038,
+            "reservable": false,
+            "way": "7457074774"
+        },
+        {
+            "name": "Nammalakuru",
+            "lat": 68.12970,
+            "lon": 24.05645,
+            "reservable": true,
+            "way": "654712277"
+        },
+        {
+            "name": "Rihmakuru",
+            "lat": 68.10855,
+            "lon": 24.04974,
+            "reservable": false,
+            "way": "607720876"
+        }
+    ]
+}
