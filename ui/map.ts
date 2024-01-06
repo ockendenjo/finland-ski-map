@@ -9,6 +9,9 @@ import {XYZ} from "ol/source";
 import {defaults as defaultControls, FullScreen, ScaleLine} from "ol/control";
 import {LayerDef} from "./ts/LayerDef";
 import {HutsLayer} from "./ts/HutsLayer";
+import {StartLayer} from "./ts/StartLayer";
+import {FinishLayer} from "./ts/FinishLayer";
+import {ControlsLayer} from "./ts/ControlsLayer";
 
 document.addEventListener("DOMContentLoaded", () => {
     const layerSwitch = 10;
@@ -28,8 +31,12 @@ document.addEventListener("DOMContentLoaded", () => {
     rasterLayers.push(osmLayer);
     rasterLayers.forEach((r) => r.setOpacity(0.6));
 
-    const hutsLayerDef = new HutsLayer();
-    const layerDefs: LayerDef[] = [hutsLayerDef];
+    const layerDefs: LayerDef[] = [
+        new HutsLayer(),
+        new StartLayer(),
+        new FinishLayer(),
+        new ControlsLayer(),
+    ];
 
     layerDefs.forEach((d) => {
         const source = new VectorSource({wrapX: false});
