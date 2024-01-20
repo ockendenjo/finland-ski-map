@@ -126,6 +126,14 @@
             "lon": 24.00520,
             "reservable": false,
             "way": "608437019"
+        },
+        {
+            "name": "Savilampi",
+            "type": "HUT",
+            "lat": 68.3282,
+            "lon": 23.87951,
+            "reservable": false,
+            "way": "705717572"
         }
     ]
 }
