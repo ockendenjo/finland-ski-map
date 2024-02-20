@@ -15,6 +15,7 @@ import {FinishLayer} from "./ts/FinishLayer";
 import {ControlsLayer} from "./ts/ControlsLayer";
 import {BusLayer} from "./ts/BusLayer";
 import {pistesLayer} from "./ts/pistes";
+import {PoiLayer} from "./ts/PoiLayer";
 
 document.addEventListener("DOMContentLoaded", () => {
     const layerSwitch = 10;
@@ -37,6 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const layerDefs: LayerDef[] = [
         new BusLayer(),
         new HutsLayer(),
+        new PoiLayer(),
         new StartLayer(),
         new FinishLayer(),
         new ControlsLayer(),
