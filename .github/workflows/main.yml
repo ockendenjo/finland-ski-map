@@ -40,7 +40,7 @@ jobs:
     name: deploy
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    environment: prod
+    environment: pro
     needs: [build]
     permissions:
       id-token: write   # This is required for requesting the JWT
@@ -49,11 +49,8 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v4
 
-      - name: Set up Go
-        timeout-minutes: 1
-        uses: actions/setup-go@v5
-        with:
-          go-version: "1.21"
+      - name: Setup terraform
+        uses: hashicorp/setup-terraform@v3
 
       - name: Download artifact
         uses: actions/download-artifact@v4
@@ -67,11 +64,15 @@ jobs:
           role-to-assume: ${{vars.DEPLOYMENT_ROLE_ARN}}
           aws-region: eu-west-1
 
-      - name: Install CDK
-        run: npm i -g aws-cdk
+      - name: Terraform Init
+        working-directory: stack
+        run: |
+          terraform init -backend-config="tfvars/backend-pro.hcl"
 
-      - name: CDK deploy
-        run: cdk deploy --require-approval never
+      - name: Terraform Apply
+        working-directory: stack
+        run: |
+          terraform apply -auto-approve -var-file="tfvars/pro.tfvars"
 
       - name: S3 Sync
         run: aws s3 sync ./ui/dist s3://${{vars.S3_BUCKET_NAME}}
