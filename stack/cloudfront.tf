@@ -33,6 +33,7 @@ resource "aws_cloudfront_distribution" "distribution" {
     viewer_protocol_policy = "redirect-to-https"
     compress               = true
     cached_methods         = ["GET", "HEAD"]
+    allowed_methods        = ["GET", "HEAD"]
     cache_policy_id        = data.aws_cloudfront_cache_policy.disabled.id
   }
 
@@ -42,6 +43,7 @@ resource "aws_cloudfront_distribution" "distribution" {
     viewer_protocol_policy = "redirect-to-https"
     compress               = true
     cached_methods         = ["GET", "HEAD"]
+    allowed_methods        = ["GET", "HEAD"]
     cache_policy_id        = data.aws_cloudfront_cache_policy.disabled.id
   }
 
