@@ -8,9 +8,13 @@ jobs:
   build:
     name: build
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout source code
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
 
       - name: Install Node modules
         working-directory: ui
@@ -43,11 +47,13 @@ jobs:
     environment: pro
     needs: [build]
     permissions:
-      id-token: write   # This is required for requesting the JWT
-      contents: read    # This is required for actions/checkout
+      id-token: write   # AWS OIDC
+      contents: read
     steps:
       - name: Checkout source code
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
 
       - name: Setup terraform
         uses: hashicorp/setup-terraform@5e8dbf3c6d9deaf4193ca7a8fb23f2ac83bb6c85 # v4.0.0
@@ -75,4 +81,6 @@ jobs:
           terraform apply -auto-approve -var-file="tfvars/pro.tfvars"
 
       - name: S3 Sync
-        run: aws s3 sync ./ui/dist s3://${{vars.S3_BUCKET_NAME}}
+        run: aws s3 sync ./ui/dist s3://${VARS_S3_BUCKET_NAME}
+        env:
+          VARS_S3_BUCKET_NAME: ${{vars.S3_BUCKET_NAME}}
